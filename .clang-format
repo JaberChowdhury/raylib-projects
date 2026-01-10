@@ -1,0 +1,37 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 120
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignTrailingComments: true
+AllowShortFunctionsOnASingleLine: Inline
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: false
+  AfterControlStatement: false
+  AfterEnum: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  BeforeCatch: false
+  BeforeElse: false
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInAngles: false
+SpaceAfterCStyleCast: true
+PointerAlignment: Left
+UseTab: Never
+
+# Custom rules for initializer lists
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+BreakConstructorInitializersBeforeComma: true
+ConstructorInitializerIndentWidth: 4
+AlignAfterOpenBracket: Align
+AlwaysBreakAfterDefinitionReturnType: None
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeTernaryOperators: true
