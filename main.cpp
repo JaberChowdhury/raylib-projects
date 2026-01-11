@@ -1,83 +1,77 @@
+#include "CircleShape.h"
 #include "raylib.h"
 #include <string>
+#include <vector>
 
-const int screenWidth  = 2048;
-const int screenHeight = 1152;
+// 1. Define Constants globally so the Class can see them
+const int SCREEN_WIDTH  = 2048 * 2;
+const int SCREEN_HEIGHT = 1152 * 2;
 
-// Define Colors
-const Color bg   = {164, 195, 178, 255};
-const Color text = {52, 77, 68, 255};
-
-void DrawTextCentered(Font font, const char* text, float y, float fontSize, float spacing, Color color) {
-    Vector2 textSize = MeasureTextEx(font, text, fontSize, spacing);
-    float   x        = (screenWidth - textSize.x) / 2.0f;
-    DrawTextEx(font, text, {x, y}, fontSize, spacing, color);
-}
-
-class CircleShape {
-  public:
-    Vector2 position;
-    Vector2 velocity; // We need velocity to control movement direction
-    float   radius;
-
-    // Constructor to initialize the circle easily
-    CircleShape(float x, float y, float r, float speedX, float speedY) {
-        position = {x, y};
-        radius   = r;
-        velocity = {speedX, speedY};
-    }
-
-    void draw() { DrawCircleV(position, radius, text); }
-
-    void update() {
-        // 1. Move the circle
-        position.x += velocity.x;
-        position.y += velocity.y;
-
-        // 2. Bounce off the Right or Left wall
-        if ((position.x + radius >= screenWidth) || (position.x - radius <= 0)) {
-            velocity.x *= -1; // Reverse horizontal direction
-        }
-
-        // 3. Bounce off the Bottom or Top wall
-        if ((position.y + radius >= screenHeight) || (position.y - radius <= 0)) {
-            velocity.y *= -1; // Reverse vertical direction
-        }
-    }
+// 2. Define a struct for Assets/Theme (Colors and Fonts)
+struct AppContext {
+    Color bg;
+    Color text;
+    Font  myfont;
 };
 
+// 3. Helper function
+void DrawTextCentered(const char* text, float y, float fontSize, float spacing, AppContext ctx) {
+    Vector2 textSize = MeasureTextEx(ctx.myfont, text, fontSize, spacing);
+    float   x        = (SCREEN_WIDTH - textSize.x) / 2.0f;
+    DrawTextEx(ctx.myfont, text, {x, y}, fontSize, spacing, ctx.text);
+}
+
 int main() {
-    InitWindow(screenWidth, screenHeight, "Raylib Moving Shapes");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Raylib Moving Shapes");
     SetTargetFPS(120);
     ChangeDirectory(GetApplicationDirectory());
 
-    Font myfont = LoadFontEx("resources/zh-cn.ttf", 96, 0, 0);
-    SetTextureFilter(myfont.texture, TEXTURE_FILTER_BILINEAR);
+    // --- INITIALIZE CONTEXT ---
+    // We must do this AFTER InitWindow because of the Font
+    AppContext ctx;
+    ctx.bg     = {164, 195, 178, 255};
+    ctx.text   = {52, 77, 68, 255};
+    ctx.myfont = LoadFontEx("resources/zh-cn.ttf", 96, 0, 0);
 
-    // --- CREATE THE CIRCLE OBJECT ---
-    // Start at center, radius 100, moving at speed (5, 5)
-    CircleShape* myCircle = new CircleShape(screenWidth / 2.0f, screenHeight / 2.0f, 100.0f, 8.0f, 8.0f);
+    SetTextureFilter(ctx.myfont.texture, TEXTURE_FILTER_BILINEAR);
 
+    // --- CREATE OBJECT ---
+    // Using stack allocation (no 'new') is safer and easier here
+    CircleShape              myCircle(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 100.0f, 8.0f, 8.0f);
+    std::vector<CircleShape> circles;
+
+    // Loop 20 times to add circles
+    for (int i = 0; i < 3000; i++) {
+        float r  = GetRandomValue(2, 8);
+        float x  = GetRandomValue(r, SCREEN_WIDTH - r);
+        float y  = GetRandomValue(r, SCREEN_HEIGHT - r);
+        float sx = GetRandomValue(-10, 10);
+        float sy = GetRandomValue(-10, 10);
+
+        // Create the circle and add it to the list
+        circles.push_back(CircleShape(x, y, r, sx, sy));
+    }
     while (!WindowShouldClose()) {
-        // --- UPDATE LOGIC ---
-        myCircle->update();
 
-        // --- DRAWING ---
+        // Draw
         BeginDrawing();
-        ClearBackground(bg);
+        ClearBackground(ctx.bg);
 
-        myCircle->draw();
+        // Pass the color from context to the draw function
+        for (int i = 0; i < circles.size(); i++) {
+            circles[i].update(SCREEN_WIDTH, SCREEN_HEIGHT);
+            circles[i].draw(ctx.text);
+        }
+        // std::string coords =
+        // "x: " + std::to_string((int) myCircle.position.x) + "  y: " + std::to_string((int) myCircle.position.y);
 
-        // Display the coordinates of the moving circle
-        std::string coords =
-            "x: " + std::to_string((int) myCircle->position.x) + "  y: " + std::to_string((int) myCircle->position.y);
-
-        DrawTextCentered(myfont, coords.c_str(), 100, 60, 10, text);
+        DrawFPS(12, 12);
+        DrawTextCentered("coords", 100, 60, 10, ctx);
 
         EndDrawing();
     }
 
-    UnloadFont(myfont);
+    UnloadFont(ctx.myfont);
     CloseWindow();
     return 0;
 }

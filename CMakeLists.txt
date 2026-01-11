@@ -12,9 +12,10 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(raylib)
 
-add_executable(${PROJECT_NAME} main.cpp)
+# --- FIX IS HERE: Add CircleShape.cpp to the list ---
+add_executable(${PROJECT_NAME} main.cpp CircleShape.cpp)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
-# --- NEW COMMAND IS BELOW ---
 # This copies the entire 'resources' folder into the build folder
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
