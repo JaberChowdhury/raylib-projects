@@ -43,6 +43,12 @@ cmake --build build
 
 ```
 
+## manually run
+
+```bash
+g++ -o test main.cpp -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 && ./test
+```
+
 _Note: On Windows, the executable path will be `.\build\Debug\raylib-project.exe`._
 
 ---
@@ -62,4 +68,5 @@ project(MyAwesomeGame)
 3. Re-run the build commands.
 
 ---
+
 # raylib-projects
