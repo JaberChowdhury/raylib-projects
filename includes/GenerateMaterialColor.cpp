@@ -1,4 +1,4 @@
-#include "raylib.h"
+#include "GenerateMaterialColor.h"
 #include <cmath>
 
 Color GenerateMaterialColor(int hue, int shade) {

@@ -12,8 +12,8 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(raylib)
 
-# --- FIX IS HERE: Add CircleShape.cpp to the list ---
-add_executable(${PROJECT_NAME} main.cpp CircleShape.cpp)
+# --- FIX IS HERE: Add CircleShape.cpp and GenerateMaterialColor.cpp to the list ---
+add_executable(${PROJECT_NAME} main.cpp CircleShape.cpp includes/GenerateMaterialColor.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
