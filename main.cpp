@@ -39,9 +39,17 @@ int main() {
 
         for (int i = 0; i < generated_colors_size; i++) {
 
-            const char* text = TextFormat("Color Index: %d (Hue: %d)", i, myHue);
+            // DrawRectangle(0, i * 50, 150, 40, OppositeColor(generated_colors[i]));
+            // const char* text = TextFormat("Color Index: %d (Hue: %d)", i, myHue);
+            const char* text = TextFormat("r = %d || g = %d || b = %d", OppositeColor(generated_colors[i]).r,
+                                          generated_colors[i].g, generated_colors[i].b);
+
+            const char* text2 = TextFormat("r = %d || g = %d || b = %d", OppositeColor(generated_colors[i]).r,
+                                           OppositeColor(generated_colors[i]).g, OppositeColor(generated_colors[i]).b);
 
             draw_text_center((i * 70), text, generated_colors[i]);
+
+            draw_text_center((i * 70), text2, OppositeColor(generated_colors[i]));
             // draw_text_center((i * 70), text, OppositeColor(generated_colors[i]));
         }
 

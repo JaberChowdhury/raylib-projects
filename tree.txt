@@ -1,0 +1,104 @@
+.
+├── CMakeLists.txt
+├── external
+│   └── material-color-utilities
+│       └── cpp
+│           ├── blend
+│           │   ├── blend.cc
+│           │   ├── blend.h
+│           │   └── blend_test.cc
+│           ├── cam
+│           │   ├── cam.cc
+│           │   ├── cam.h
+│           │   ├── cam_test.cc
+│           │   ├── hct.cc
+│           │   ├── hct.h
+│           │   ├── hct_solver.cc
+│           │   ├── hct_solver.h
+│           │   ├── hct_solver_test.cc
+│           │   ├── hct_test.cc
+│           │   ├── viewing_conditions.cc
+│           │   └── viewing_conditions.h
+│           ├── contrast
+│           │   ├── contrast.cc
+│           │   ├── contrast.h
+│           │   └── contrast_test.cc
+│           ├── dislike
+│           │   ├── dislike.cc
+│           │   ├── dislike.h
+│           │   └── dislike_test.cc
+│           ├── dynamiccolor
+│           │   ├── contrast_curve.h
+│           │   ├── dynamic_color.cc
+│           │   ├── dynamic_color.h
+│           │   ├── dynamic_scheme.cc
+│           │   ├── dynamic_scheme.h
+│           │   ├── material_dynamic_colors.cc
+│           │   ├── material_dynamic_colors.h
+│           │   ├── tone_delta_pair.h
+│           │   └── variant.h
+│           ├── palettes
+│           │   ├── core.h
+│           │   ├── tones.cc
+│           │   ├── tones.h
+│           │   └── tones_test.cc
+│           ├── quantize
+│           │   ├── celebi.cc
+│           │   ├── celebi.h
+│           │   ├── celebi_test.cc
+│           │   ├── lab.cc
+│           │   ├── lab.h
+│           │   ├── wsmeans.cc
+│           │   ├── wsmeans.h
+│           │   ├── wsmeans_test.cc
+│           │   ├── wu.cc
+│           │   ├── wu.h
+│           │   └── wu_test.cc
+│           ├── scheme
+│           │   ├── scheme_content.cc
+│           │   ├── scheme_content.h
+│           │   ├── scheme_expressive.cc
+│           │   ├── scheme_expressive.h
+│           │   ├── scheme_fidelity.cc
+│           │   ├── scheme_fidelity.h
+│           │   ├── scheme_fruit_salad.cc
+│           │   ├── scheme_fruit_salad.h
+│           │   ├── scheme_monochrome.cc
+│           │   ├── scheme_monochrome.h
+│           │   ├── scheme_monochrome_test.cc
+│           │   ├── scheme_neutral.cc
+│           │   ├── scheme_neutral.h
+│           │   ├── scheme_rainbow.cc
+│           │   ├── scheme_rainbow.h
+│           │   ├── scheme_tonal_spot.cc
+│           │   ├── scheme_tonal_spot.h
+│           │   ├── scheme_vibrant.cc
+│           │   └── scheme_vibrant.h
+│           ├── score
+│           │   ├── score.cc
+│           │   ├── score.h
+│           │   └── score_test.cc
+│           ├── temperature
+│           │   ├── temperature_cache.cc
+│           │   ├── temperature_cache.h
+│           │   └── temperature_cache_test.cc
+│           └── utils
+│               ├── utils.cc
+│               ├── utils.h
+│               └── utils_test.cc
+├── genshine_ui.cpp
+├── includes
+│   ├── Card.cpp
+│   ├── GenerateMaterialColor.cpp
+│   └── OppositeColor.cpp
+├── main.cpp
+├── material_color.cpp
+├── MaterialUtils.cpp
+├── MaterialUtils.hpp
+├── og.cpp
+├── README.md
+├── resources
+│   └── zh-cn.ttf
+└── tree.txt
+
+17 directories, 85 files
