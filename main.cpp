@@ -1,11 +1,11 @@
-#include "CircleShape.h"
+#include "CircleShape.cpp"
+#include "includes/GenerateMaterialColor.cpp"
 #include "raylib.h"
-#include <string>
 #include <vector>
 
 // 1. Define Constants globally so the Class can see them
-const int SCREEN_WIDTH  = 2048 * 2;
-const int SCREEN_HEIGHT = 1152 * 2;
+const int SCREEN_WIDTH  = 2048;
+const int SCREEN_HEIGHT = 1152;
 
 // 2. Define a struct for Assets/Theme (Colors and Fonts)
 struct AppContext {
@@ -41,7 +41,7 @@ int main() {
     std::vector<CircleShape> circles;
 
     // Loop 20 times to add circles
-    for (int i = 0; i < 3000; i++) {
+    for (int i = 0; i < 20; i++) {
         float r  = GetRandomValue(2, 8);
         float x  = GetRandomValue(r, SCREEN_WIDTH - r);
         float y  = GetRandomValue(r, SCREEN_HEIGHT - r);
@@ -60,13 +60,13 @@ int main() {
         // Pass the color from context to the draw function
         for (int i = 0; i < circles.size(); i++) {
             circles[i].update(SCREEN_WIDTH, SCREEN_HEIGHT);
-            circles[i].draw(ctx.text);
+            circles[i].draw(GenerateMaterialColor(220, 750));
         }
         // std::string coords =
         // "x: " + std::to_string((int) myCircle.position.x) + "  y: " + std::to_string((int) myCircle.position.y);
 
         DrawFPS(12, 12);
-        DrawTextCentered("coords", 100, 60, 10, ctx);
+        DrawTextCentered("coords!!", 100, 60, 10, ctx);
 
         EndDrawing();
     }

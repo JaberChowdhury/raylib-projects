@@ -1,0 +1,10 @@
+[
+  {
+    "label": "Build and Run",
+    "command": "g++ -o \"$ZED_STEM\" \"$ZED_FILE\" -lraylib -lGL -lm -lpthread -ldl -lrt -lX11; and begin; ./\"$ZED_STEM\"; rm \"$ZED_STEM\"; end",
+    "cwd": "$ZED_DIRNAME",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "no_focus",
+  },
+]
