@@ -1,7 +1,7 @@
 #include "raylib.h"
 #include <math.h> // For sinf, cosf
 
-#define NUM_NODES 20
+#define NUM_NODES 30
 #define NODE_RADIUS 55
 #define LAYOUT_RADIUS NODE_RADIUS*(NUM_NODES / 2) // Distance from center to nodes
 

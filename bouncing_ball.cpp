@@ -1,4 +1,7 @@
+#include "includes/GenerateMaterialColor.cpp"
 #include "raylib.h"
+#include <cstddef>
+#include <ctime>
 #include <string>
 
 const int screenWidth  = 2048;
@@ -19,6 +22,7 @@ class CircleShape {
     Vector2 position;
     Vector2 velocity; // We need velocity to control movement direction
     float   radius;
+    Color   color = GenerateMaterialColor(100, 200);
 
     // Constructor to initialize the circle easily
     CircleShape(float x, float y, float r, float speedX, float speedY) {
@@ -27,7 +31,7 @@ class CircleShape {
         velocity = {speedX, speedY};
     }
 
-    void draw() { DrawCircleV(position, radius, text); }
+    void draw() { DrawCircleV(position, radius, this->color); }
 
     void update() {
         // 1. Move the circle
@@ -35,13 +39,17 @@ class CircleShape {
         position.y += velocity.y;
 
         // 2. Bounce off the Right or Left wall
+
         if ((position.x + radius >= screenWidth) || (position.x - radius <= 0)) {
             velocity.x *= -1; // Reverse horizontal direction
+            this->color = GenerateMaterialColor(GetRandomValue(12, 100), GetRandomValue(12, 500));
         }
 
         // 3. Bounce off the Bottom or Top wall
+        SetRandomSeed(std::time(NULL));
         if ((position.y + radius >= screenHeight) || (position.y - radius <= 0)) {
             velocity.y *= -1; // Reverse vertical direction
+            this->color = GenerateMaterialColor(GetRandomValue(12, 100), GetRandomValue(12, 500));
         }
     }
 };
